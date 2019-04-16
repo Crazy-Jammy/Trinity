@@ -23,11 +23,25 @@
             private set;
         }
 
+        public static SkillSystemComponent SkillSystem
+        {
+            get;
+            private set;
+        }
+
+        public static BehaviorNodeSystemComponent BehaviorNodeSystem
+        {
+            get;
+            private set;
+        }
+
         private static void InitCustomComponents()
         {
             BuiltinData = UnityGameFramework.Runtime.GameEntry.GetComponent<BuiltinDataComponent>();
             ETNetwork = UnityGameFramework.Runtime.GameEntry.GetComponent<ETNetworkComponent>();
             ILRuntime = UnityGameFramework.Runtime.GameEntry.GetComponent<ILRuntimeComponent>();
+            SkillSystem = UnityGameFramework.Runtime.GameEntry.GetComponent<SkillSystemComponent>();
+            BehaviorNodeSystem = UnityGameFramework.Runtime.GameEntry.GetComponent<BehaviorNodeSystemComponent>();
         }
     }
 }

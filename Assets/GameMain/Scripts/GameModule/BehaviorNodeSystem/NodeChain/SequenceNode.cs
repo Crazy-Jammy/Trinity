@@ -6,39 +6,53 @@ using UnityEngine;
 namespace Trinity
 {
     /// <summary>
-    /// 序列结点
+    /// 序列结点(只有将前面的子结点执行完毕才会执行后面的）
     /// </summary>
-    public class SequenceNode : BehaviorNodeBase
+    public class SequenceNode : BehaviorNodeBase , IBehaviorNodeChain
     {
 
         /// <summary>
-        /// 已执行完毕的子结点
+        /// 所有子结点
         /// </summary>
         private List<BehaviorNodeBase> m_Nodes = new List<BehaviorNodeBase>();
 
         /// <summary>
         /// 需要执行的子结点
         /// </summary>
-        private List<BehaviorNodeBase> m_NeedExcuteChilds = new List<BehaviorNodeBase>();
+        private Queue<BehaviorNodeBase> m_NeedExcuteChilds = new Queue<BehaviorNodeBase>();
 
-
-
-        /// <summary>
-        /// 追加结点到序列结点中
-        /// </summary>
-        /// <param name="node"></param>
-        /// <returns></returns>
-        public SequenceNode Append(BehaviorNodeBase node)
+        public IBehaviorNodeChain Append(BehaviorNodeBase node)
         {
-            m_NeedExcuteChilds.Add(node);
+            m_Nodes.Add(node);
+            m_NeedExcuteChilds.Enqueue(node);
             return this;
         }
 
         public SequenceNode Fill(GameFrameworkAction onExecuteBegin, GameFrameworkAction onExecuteEnd, params BehaviorNodeBase[] nodes)
         {
             base.Fill(onExecuteBegin, onExecuteEnd);
-            m_NeedExcuteChilds.AddRange(nodes);
+            m_Nodes.AddRange(nodes);
+
+            m_NeedExcuteChilds.Clear();
+            foreach (BehaviorNodeBase node in nodes)
+            {
+                m_NeedExcuteChilds.Enqueue(node);
+            }
+            
+
             return this;
+        }
+
+        public override void Clear()
+        {
+
+            base.Clear();
+            foreach (BehaviorNodeBase node in m_Nodes)
+            {
+                node.Reset();
+                ReferencePool.Release(node as IReference);
+            }
+            m_Nodes.Clear();
         }
 
         protected override void OnReset()
@@ -49,7 +63,7 @@ namespace Trinity
             foreach (BehaviorNodeBase node in m_Nodes)
             {
                 node.Reset();
-                m_NeedExcuteChilds.Add(node);
+                m_NeedExcuteChilds.Enqueue(node);
             }        
         }
 
@@ -60,11 +74,9 @@ namespace Trinity
             if (m_NeedExcuteChilds.Count > 0)
             {
                 //执行第一个子结点
-                if (m_NeedExcuteChilds[0].Execute(elapseSeconds, realElapseSeconds))
+                if (m_NeedExcuteChilds.Peek().Execute(elapseSeconds, realElapseSeconds))
                 {
-                    m_Nodes.Add(m_NeedExcuteChilds[0]);
-                    m_NeedExcuteChilds.RemoveAt(0);
-                    
+                    m_NeedExcuteChilds.Dequeue();
                 }
             }
 
@@ -72,9 +84,7 @@ namespace Trinity
             Finished = m_NeedExcuteChilds.Count == 0;
         }
 
-      
-
-
+       
     }
 }
 

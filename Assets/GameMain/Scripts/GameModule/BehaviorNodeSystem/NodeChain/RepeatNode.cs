@@ -6,9 +6,9 @@ using UnityEngine;
 namespace Trinity
 {
     /// <summary>
-    /// 重复执行结点
+    /// 重复结点（会重复执行子结点）
     /// </summary>
-    public class RepeatNode : BehaviorNodeBase
+    public class RepeatNode : BehaviorNodeBase ,IBehaviorNodeChain
     {
         /// <summary>
         /// 要重复执行的结点
@@ -29,16 +29,13 @@ namespace Trinity
         /// </summary>
         private int m_CurrentRepeatCount;
 
-        /// <summary>
-        /// 是否已重复执行完毕
-        /// </summary>
-        public bool Completed
+        public IBehaviorNodeChain Append(BehaviorNodeBase node)
         {
-            get;
-            private set;
+            (m_Node as IBehaviorNodeChain).Append(node);
+            return this;
         }
 
-        public RepeatNode Fill(GameFrameworkAction onExecuteBegin, GameFrameworkAction onExecuteEnd,BehaviorNodeBase node,int repeatCount)
+        public RepeatNode Fill(GameFrameworkAction onExecuteBegin, GameFrameworkAction onExecuteEnd, int repeatCount,BehaviorNodeBase node)
         {
             base.Fill(onExecuteBegin, onExecuteEnd);
             m_Node = node;
@@ -49,14 +46,16 @@ namespace Trinity
         public override void Clear()
         {
             base.Clear();
+            ReferencePool.Release(m_Node as IReference);
             m_Node = default(BehaviorNodeBase);
             RepeatCount = default(int);
+            m_CurrentRepeatCount = default(int);
+
         }
 
         protected override void OnReset()
         {
             base.OnReset();
-
             m_Node?.Reset();
         }
 
@@ -75,18 +74,19 @@ namespace Trinity
                 return;
             }
 
+            ++m_CurrentRepeatCount;
             if (m_Node.Execute(elapseSeconds, realElapseSeconds))
             {
                 m_Node.Reset();
-                ++m_CurrentRepeatCount;
             }
 
-            if (m_CurrentRepeatCount == RepeatCount)
+            if (m_CurrentRepeatCount >= RepeatCount)
             {
                 Finished = true;
-                Completed = true;
             }
         }
+
+      
     }
 }
 

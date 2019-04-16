@@ -7,11 +7,17 @@ using UnityEngine;
 namespace Trinity
 {
     /// <summary>
-    /// 并行结点
+    /// 并行结点（会逐个执行子结点）
     /// </summary>
-    public class ParallelNode : BehaviorNodeBase
+    public class ParallelNode : BehaviorNodeBase,IBehaviorNodeChain
     {
         private List<BehaviorNodeBase> m_Nodes = new List<BehaviorNodeBase>();
+
+        public IBehaviorNodeChain Append(BehaviorNodeBase node)
+        {
+            m_Nodes.Add(node);
+            return this;
+        }
 
         public ParallelNode Fill(GameFrameworkAction onExecuteBegin, GameFrameworkAction onExecuteEnd, params BehaviorNodeBase[] nodes)
         {
@@ -23,6 +29,10 @@ namespace Trinity
         public override void Clear()
         {
             base.Clear();
+            foreach (BehaviorNodeBase node in m_Nodes)
+            {
+                ReferencePool.Release(node as IReference);
+            }
             m_Nodes.Clear();
         }
 
@@ -39,16 +49,11 @@ namespace Trinity
                 }
             }
 
-            //只有当所有子结点都执行完毕后，并发执行结点才算执行完毕
+            //只有当所有子结点都执行完毕后，并行结点才算执行完毕
             Finished = m_Nodes.All(node => node.Finished);
         }
 
-        public ParallelNode Append(BehaviorNodeBase node)
-        {
-            m_Nodes.Add(node);
-            return this;
-        }
-
+       
     }
 
 }

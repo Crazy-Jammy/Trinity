@@ -39,14 +39,10 @@ namespace Trinity
         /// </summary>
         public void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
-            if (Finished)
-            {
-                Reset();
-            }
-            else
+            if (!Finished)
             {
                 Execute(elapseSeconds, realElapseSeconds);
-            } 
+            }
         }
 
         /// <summary>
@@ -135,10 +131,9 @@ namespace Trinity
 
         public virtual void Clear()
         {
-            Reset();
             m_OnExecuteBegin = default(GameFrameworkAction);
             m_OnExecuteEnd = default(GameFrameworkAction);
-            
+            Reset();
         }
     }
 }

@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e950b27a5b2e65438c2675cc90eb614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsSequnceMode: 1
+  IsSequnceMode: 0
 --- !u!1 &639611206
 GameObject:
   m_ObjectHideFlags: 0

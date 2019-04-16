@@ -17,6 +17,9 @@ namespace Trinity
         /// </summary>
         private LinkedList<BuffBase> m_Buffs = new LinkedList<BuffBase>();
 
+        private List<BuffBase> m_TempBuffs = new List<BuffBase>();
+
+
         private void Update()
         {
             LinkedListNode<BuffBase> current = m_Buffs.First;
@@ -29,7 +32,7 @@ namespace Trinity
         }
 
         /// <summary>
-        /// 添加Buff
+        /// 附加Buff
         /// </summary>
         public void AttachBuff(BuffBase buff) {
             m_Buffs.AddLast(buff);
@@ -52,17 +55,17 @@ namespace Trinity
         /// <summary>
         /// 获取指定Entity上所有的Buff
         /// </summary>
-        public List<BuffBase> GetBuffByEntity(Entity owner)
+        public BuffBase[] GetBuffByEntity(Entity owner)
         {
-            List<BuffBase> buffs = new List<BuffBase>();
+            m_TempBuffs.Clear();
             foreach (BuffBase buff in m_Buffs)
             {
                 if (buff.Owner == owner)
                 {
-                    buffs.Add(buff);
+                    m_TempBuffs.Add(buff);
                 }
             }
-            return buffs;
+            return m_TempBuffs.ToArray();
         }
 
 

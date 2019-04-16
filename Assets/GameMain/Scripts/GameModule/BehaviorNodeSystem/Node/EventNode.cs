@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Trinity
 {
     /// <summary>
-    /// 事件行为结点
+    /// 事件结点
     /// </summary>
     public class EventNode : BehaviorNodeBase
     {

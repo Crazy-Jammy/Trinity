@@ -4,7 +4,7 @@ namespace Trinity
 {
     
     /// <summary>
-    /// 等待条件结点
+    /// 等待条件结点（指定条件达成时才算执行完毕）
     /// </summary>
     public class AwaitConditionNode : BehaviorNodeBase
     {
@@ -23,7 +23,7 @@ namespace Trinity
         public override void Clear()
         {
             base.Clear();
-            m_Condition = null;
+            m_Condition = default(GameFrameworkFunc<bool>);
         }
 
         protected override void OnExecute(float elapseSeconds, float realElapseSeconds)

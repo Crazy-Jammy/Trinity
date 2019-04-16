@@ -6,6 +6,7 @@ using UnityGameFramework.Runtime;
 
 namespace Trinity
 {
+
     /// <summary>
     /// 行为结点系统组件
     /// </summary>
@@ -38,7 +39,7 @@ namespace Trinity
         }
 
         /// <summary>
-        /// 执行结点
+        /// 从根结点执行结点
         /// </summary>
         public void ExecuteNode(BehaviorNodeBase node)
         {
@@ -55,56 +56,8 @@ namespace Trinity
             {
                 Log.Info("删除了行为结点,Type" + node.GetType());
                 m_Nodes.Remove(node);
-                
+                ReferencePool.Release(node as IReference);
             }
-        }
-
-        /// <summary>
-        /// 开启序列结点链
-        /// </summary>
-        public SequenceNodeChain Sequence(params BehaviorNodeBase[] nodes)
-        {
-            return Sequence(null, null,nodes);
-        }
-
-        /// <summary>
-        /// 开启序列结点链
-        /// </summary>
-        public SequenceNodeChain Sequence(GameFrameworkAction onExecuteBegin, GameFrameworkAction onExecuteEnd, params BehaviorNodeBase[] nodes)
-        {
-            return ReferencePool.Acquire<SequenceNodeChain>().Fill(onExecuteBegin,onExecuteEnd,nodes);
-        }
-
-        /// <summary>
-        /// 开启并行结点链
-        /// </summary>
-        public BehaviorNodeChainBase Parallel(params BehaviorNodeBase[] nodes)
-        {
-            return Parallel(null, null, nodes);
-        }
-
-        /// <summary>
-        /// 开启并行结点链
-        /// </summary>
-        public BehaviorNodeChainBase Parallel(GameFrameworkAction onExecuteBegin, GameFrameworkAction onExecuteEnd, params BehaviorNodeBase[] nodes)
-        {
-            return ReferencePool.Acquire<ParallelNodeChain>().Fill(onExecuteBegin, onExecuteEnd, nodes);
-        }
-
-        // <summary>
-        /// 开启重复结点链
-        /// </summary>
-        public BehaviorNodeChainBase Repeat(int repeatCount, params BehaviorNodeBase[] nodes)
-        {
-            return Repeat(null, null, repeatCount, nodes);
-        }
-
-        /// <summary>
-        /// 开启重复结点链
-        /// </summary>
-        public BehaviorNodeChainBase Repeat(GameFrameworkAction onExecuteBegin, GameFrameworkAction onExecuteEnd, int repeatCount, params BehaviorNodeBase[] nodes)
-        {
-            return ReferencePool.Acquire<RepeatNodeChain>().Fill(onExecuteBegin, onExecuteEnd, repeatCount, nodes);
         }
 
         /// <summary>
@@ -140,6 +93,56 @@ namespace Trinity
         {
             return ReferencePool.Acquire<DelayNode>().Fill(onExecuteBegin, onExecuteEnd, delayTime);
         }
+
+        /// <summary>
+        /// 开启序列结点链
+        /// </summary>
+        public IBehaviorNodeChain Sequence(params BehaviorNodeBase[] nodes)
+        {
+            return Sequence(null, null,nodes);
+        }
+
+        /// <summary>
+        /// 开启序列结点链
+        /// </summary>
+        public IBehaviorNodeChain Sequence(GameFrameworkAction onExecuteBegin, GameFrameworkAction onExecuteEnd, params BehaviorNodeBase[] nodes)
+        {
+            return ReferencePool.Acquire<SequenceNode>().Fill(onExecuteBegin,onExecuteEnd,nodes) as IBehaviorNodeChain;
+        }
+
+        /// <summary>
+        /// 开启并行结点链
+        /// </summary>
+        public IBehaviorNodeChain Parallel(params BehaviorNodeBase[] nodes)
+        {
+            return Parallel(null, null, nodes);
+        }
+
+        /// <summary>
+        /// 开启并行结点链
+        /// </summary>
+        public IBehaviorNodeChain Parallel(GameFrameworkAction onExecuteBegin, GameFrameworkAction onExecuteEnd, params BehaviorNodeBase[] nodes)
+        {
+            return ReferencePool.Acquire<ParallelNode>().Fill(onExecuteBegin, onExecuteEnd, nodes) as IBehaviorNodeChain;
+        }
+
+        // <summary>
+        /// 开启重复结点链
+        /// </summary>
+        public IBehaviorNodeChain Repeat(int repeatCount, BehaviorNodeBase node)
+        {
+            return Repeat(null, null, repeatCount, node);
+        }
+
+        /// <summary>
+        /// 开启重复结点链
+        /// </summary>
+        public IBehaviorNodeChain Repeat(GameFrameworkAction onExecuteBegin, GameFrameworkAction onExecuteEnd, int repeatCount, BehaviorNodeBase node)
+        {
+            return ReferencePool.Acquire<RepeatNode>().Fill(onExecuteBegin, onExecuteEnd,repeatCount, node) as IBehaviorNodeChain;
+        }
+
+        
     }
 }
 

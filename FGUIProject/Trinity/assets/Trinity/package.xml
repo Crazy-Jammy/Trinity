@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="sgzdq45z" jpegQuality="80" compressPNG="true">
+  <resources>
+    <component id="nlwe0" name="TestForm.xml" path="/" exported="true"/>
+    <image id="nlwe1" name="btnimage.png" path="/"/>
+    <image id="nlwe2" name="5.png" path="/"/>
+    <component id="nlwe3" name="BtnBag.xml" path="/"/>
+  </resources>
+  <publish name="Trinity" genCode="true"/>
+</packageDescription>

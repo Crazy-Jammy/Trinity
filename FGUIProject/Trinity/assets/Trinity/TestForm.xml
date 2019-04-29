@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1080,1920">
+  <displayList>
+    <graph id="n2_nlwe" name="n2" xy="0,0" size="1080,1920" type="rect"/>
+    <image id="n1_nlwe" name="n1" src="nlwe2" fileName="5.png" xy="240,133"/>
+    <component id="n3_nlwe" name="BtnBag" src="nlwe3" fileName="BtnBag.xml" xy="430,606" scale="3,3"/>
+  </displayList>
+</component>

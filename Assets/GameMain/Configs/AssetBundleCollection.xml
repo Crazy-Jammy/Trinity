@@ -1,7 +1,24 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <UnityGameFramework>
   <AssetBundleCollection>
-    <AssetBundles />
-    <Assets />
+    <AssetBundles>
+      <AssetBundle Name="Config" LoadType="0" Packed="False" />
+      <AssetBundle Name="DataTables" LoadType="0" Packed="False" />
+      <AssetBundle Name="Scenes" LoadType="0" Packed="False" />
+      <AssetBundle Name="UIForms" LoadType="0" Packed="False" />
+    </AssetBundles>
+    <Assets>
+      <Asset Guid="15d6e6cda1c70eb4e83f54ea2dc86351" AssetBundleName="DataTables" />
+      <Asset Guid="5f4891b7892d3814fa09b372f3aba4b5" AssetBundleName="DataTables" />
+      <Asset Guid="61e8d77c7fd63cd48afe8906bb195428" AssetBundleName="DataTables" />
+      <Asset Guid="765da3f968135254cbdab6601986a68c" AssetBundleName="UIForms" />
+      <Asset Guid="985dfce4072a40848bf51e7cb7afb9cb" AssetBundleName="DataTables" />
+      <Asset Guid="b213920be0a6cea4eb6e0a5afd07555e" AssetBundleName="Config" />
+      <Asset Guid="bf4783a44b7d6e54588a7fa583d0ea76" AssetBundleName="UIForms" />
+      <Asset Guid="c0a6d6a5655369c40adefb57c8b6eecc" AssetBundleName="DataTables" />
+      <Asset Guid="cdf569eaa045c444eb3b1d834bee5fc0" AssetBundleName="Config" />
+      <Asset Guid="d030fa9314af24c48b8cf66b09e3f689" AssetBundleName="DataTables" />
+      <Asset Guid="f3db2cfb8cdfd9b41a6f0826529665cb" AssetBundleName="Scenes" />
+    </Assets>
   </AssetBundleCollection>
 </UnityGameFramework>

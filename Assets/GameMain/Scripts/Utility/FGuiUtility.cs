@@ -1,4 +1,5 @@
-﻿using GameFramework.Resource;
+﻿using FairyGUI;
+using GameFramework.Resource;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,39 +12,60 @@ namespace Trinity
     /// </summary>
     public static class FGuiUtility
     {
-
-        private static ReferenceCollector m_RC;
-
+        private static Dictionary<string, int> m_FGuiResRef = new Dictionary<string, int>();
+        
         /// <summary>
-        /// 初始化FGui资源预制体
+        /// 添加FGui资源包
         /// </summary>
-        public static void InitFGuiRes()
+        public static void AddFGuiRes(string packageName)
         {
-            GameEntry.Resource.LoadAsset("Assets/GameMain/UI/FGuiRes/FGuiRes.prefab", Constant.AssetPriority.UIFormAsset, new LoadAssetCallbacks(
-            (assetName, asset, duration, userData) =>
-             {
-                 GameObject fguiRes = (GameObject)asset;
-                 m_RC = fguiRes.GetComponent<ReferenceCollector>();
-                 Log.Info("加载FGuiRes成功");
-             },
 
-            (assetName, status, errorMessage, userData) =>
+            if (m_FGuiResRef.ContainsKey(packageName))
             {
-                Log.Error("加载FGuiRes失败：{0}", errorMessage);
-            }));
+                m_FGuiResRef[packageName]++;
+                return;
+            }
 
+            GameEntry.Resource.LoadAsset($"Assets/GameMain/UI/FGuiRes/{packageName}.prefab", Constant.AssetPriority.UIFormAsset, new LoadAssetCallbacks(
+           (assetName, asset, duration, userData) =>
+           {
+               GameObject fguiRes = (GameObject)asset;
+               ReferenceCollector rc = fguiRes.GetComponent<ReferenceCollector>();
+               m_FGuiResRef.Add(packageName, 1);
+               Log.Info("加载FGuiRes成功，资源名：" + assetName);
+
+               //自定义FGui资源包加载方式
+               UIPackage.AddPackage(packageName, (string name, string extension, System.Type type, out DestroyMethod destroyMethod) =>
+               {
+                   destroyMethod = DestroyMethod.Unload;
+                   return rc.Get<Object>(name);
+               });
+               
+           },
+
+           (assetName, status, errorMessage, userData) =>
+           {
+               Log.Error($"加载FGuiRes失败，资源名：{assetName}，错误信息：{errorMessage}");
+           }));
         }
 
         /// <summary>
-        /// 获取FGui资源对象
+        /// 移除FGui资源包
         /// </summary>
-        /// <returns></returns>
-        public static Object GetFGuiResObject(string objectName)
+        public static void RemoveFGuiRes(string packageName)
         {
-            return m_RC.Get<Object>(objectName);
+            if (!m_FGuiResRef.ContainsKey(packageName))
+            {
+                return;
+            }
+
+            m_FGuiResRef[packageName]--;
+            if (m_FGuiResRef[packageName] <= 0)
+            {
+                m_FGuiResRef.Remove(packageName);
+                UIPackage.RemovePackage(packageName);
+            }
         }
-
-
     }
 }
 

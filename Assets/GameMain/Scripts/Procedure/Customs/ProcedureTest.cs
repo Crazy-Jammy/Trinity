@@ -14,9 +14,17 @@ namespace Trinity
             base.OnEnter(procedureOwner);
 
             Log.Info("进入了测试流程");
-            GameEntry.UI.OpenUIForm(UIFormId.TestForm);
+            
         }
 
+        protected override void OnUpdate(IFsm<IProcedureManager> procedureOwner, float elapseSeconds, float realElapseSeconds)
+        {
+            base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                GameEntry.UI.OpenUIForm(UIFormId.TestForm);
+            }
+        }
     }
 }
 

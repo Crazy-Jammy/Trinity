@@ -173,5 +173,10 @@ namespace Trinity
             return uiComponent.OpenUIForm(assetName, drUIForm.UIGroupName, Constant.AssetPriority.UIFormAsset, drUIForm.PauseCoveredUIForm, userData);
         }
 
+        public static void SetUIInstanceRoot(this UIComponent uiComponent)
+        {
+
+        }
+
     }
 }

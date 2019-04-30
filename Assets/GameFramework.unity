@@ -321,34 +321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91afc4d66a48cb46becc2578b6b8899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &922220901
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 922220902}
-  m_Layer: 0
-  m_Name: GRoot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &922220902
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 922220901}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1552847160}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1208478061
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,7 +651,7 @@ Prefab:
     - target: {fileID: 11454530, guid: adb3eb1c35fcff14f89fba7b05c9d71c, type: 2}
       propertyPath: m_InstanceRoot
       value: 
-      objectReference: {fileID: 922220902}
+      objectReference: {fileID: 0}
     - target: {fileID: 11454530, guid: adb3eb1c35fcff14f89fba7b05c9d71c, type: 2}
       propertyPath: m_UIGroupHelperTypeName
       value: Trinity.FGuiGroupHelper
@@ -728,19 +700,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 167768, guid: adb3eb1c35fcff14f89fba7b05c9d71c, type: 2}
   m_PrefabInternal: {fileID: 1552847158}
 --- !u!114 &1552847162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1552847161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0922848d650639f479e29635982d4a4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObjectsOnStage: 0
-  GraphicsOnStage: 0
---- !u!114 &1552847163
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}

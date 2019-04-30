@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4838471243932000}
   - component: {fileID: 114991349757848938}
   m_Layer: 0
-  m_Name: FGuiRes
+  m_Name: Trinity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

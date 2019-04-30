@@ -7,28 +7,25 @@ using UnityGameFramework.Runtime;
 namespace Trinity
 {
 
-    public class TestForm : FGuiForm
+    public class TestForm2 : FGuiForm
     {
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-            
-            GButton btn = UI.GetChild("BtnBag").asButton;
-            btn.onClick.Set(() =>
-            {
-                Log.Info("点击了按钮");
-                GameEntry.UI.OpenUIForm(UIFormId.TestForm2);
-            });
+            Log.Info("666");
         }
+
 
         protected override void OnUpdate(float elapseSeconds, float realElapseSeconds)
         {
             base.OnUpdate(elapseSeconds, realElapseSeconds);
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 GameEntry.UI.CloseUIForm(UIForm);
             }
         }
+
+        
     }
 }
 

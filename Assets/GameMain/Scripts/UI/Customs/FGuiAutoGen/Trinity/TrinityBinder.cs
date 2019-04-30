@@ -10,6 +10,7 @@ namespace Trinity
 		{
 			UIObjectFactory.SetPackageItemExtension(UI_TestForm.URL, typeof(UI_TestForm));
 			UIObjectFactory.SetPackageItemExtension(UI_BtnBag.URL, typeof(UI_BtnBag));
+			UIObjectFactory.SetPackageItemExtension(UI_TestFrom2.URL, typeof(UI_TestFrom2));
 		}
 	}
 }

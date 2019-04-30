@@ -7,6 +7,7 @@
     {
         Undefined = 0,
 
-        TestForm = 1
+        TestForm = 1,
+        TestForm2 = 2
     }
 }

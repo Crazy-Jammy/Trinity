@@ -5,6 +5,9 @@
     <image id="nlwe1" name="btnimage.png" path="/"/>
     <image id="nlwe2" name="5.png" path="/"/>
     <component id="nlwe3" name="BtnBag.xml" path="/"/>
+    <component id="ol7f4" name="TestFrom2.xml" path="/" exported="true"/>
+    <image id="ol7f5" name="n5.png" path="/"/>
+    <image id="ol7f6" name="n4.png" path="/"/>
   </resources>
   <publish name="Trinity" genCode="true"/>
 </packageDescription>

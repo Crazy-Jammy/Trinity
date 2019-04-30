@@ -160,18 +160,17 @@ namespace FairyGUI
 			_rollOutChain = new List<DisplayObject>();
 			_rollOverChain = new List<DisplayObject>();
 
-            //StageEngine engine = GameObject.FindObjectOfType<StageEngine>();
-            //if (engine != null)
-            //    Object.Destroy(engine.gameObject);
+            StageEngine engine = GameObject.FindObjectOfType<StageEngine>();
+            if (engine != null)
+                Object.Destroy(engine.gameObject);
 
-            //this.gameObject.name = "Stage";
-            //this.gameObject.layer = LayerMask.NameToLayer(StageCamera.LayerName);
-            //this.gameObject.AddComponent<StageEngine>();
-            //this.gameObject.AddComponent<UIContentScaler>();
-            //this.gameObject.SetActive(true);
+            this.gameObject.name = "Stage";
+            this.gameObject.layer = LayerMask.NameToLayer(StageCamera.LayerName);
+            this.gameObject.AddComponent<StageEngine>();
+            this.gameObject.AddComponent<UIContentScaler>();
+            this.gameObject.SetActive(true);
+            gameObject.transform.SetParent(GameObject.FindObjectOfType<UIConfig>().transform);
             //Object.DontDestroyOnLoad(this.gameObject);
-
-            this.gameObject = GameObject.FindObjectOfType<StageEngine>().gameObject;
 
             this.cachedTransform.localScale = new Vector3(StageCamera.UnitsPerPixel, StageCamera.UnitsPerPixel, StageCamera.UnitsPerPixel);
 

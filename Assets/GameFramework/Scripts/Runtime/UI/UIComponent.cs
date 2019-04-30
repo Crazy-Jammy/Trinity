@@ -212,9 +212,13 @@ namespace UnityGameFramework.Runtime
 
             if (m_InstanceRoot == null)
             {
-                m_InstanceRoot = (new GameObject("UI Form Instances")).transform;
-                m_InstanceRoot.SetParent(gameObject.transform);
-                m_InstanceRoot.localScale = Vector3.one;
+                //m_InstanceRoot = (new GameObject("UI Form Instances")).transform;
+                //m_InstanceRoot.SetParent(gameObject.transform);
+                //m_InstanceRoot.localScale = Vector3.one;
+
+                //修改UGF源码 以配合FGUI使用
+                m_InstanceRoot = this.transform.GetChild(1).GetChild(0);
+   
             }
 
             m_InstanceRoot.gameObject.layer = LayerMask.NameToLayer("UI");

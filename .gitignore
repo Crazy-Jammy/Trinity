@@ -6,11 +6,10 @@
 # My configurations:
 /Library
 /Packages
-/Logs
 /*.sln
 /*.csproj
 Bin/
 .vs/
 obj/
+Logs/
 Temp/
-*.log

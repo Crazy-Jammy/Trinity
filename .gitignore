@@ -13,3 +13,5 @@ Bin/
 obj/
 Logs/
 Temp/
+Assets/Scripts/GameMain/Customs/CustomComponents/ILRuntime/Generated/*.meta
+Assets/Scripts/GameMain/Customs/CustomComponents/ILRuntime/Generated/*.cs
